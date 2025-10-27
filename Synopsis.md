@@ -1,7 +1,7 @@
 ## Requirements Synopsis
 The Synopsis is a short document outlining the app vision and should contain:
 
-- Front page: (e.g. project/app title, group-member names, study numbers
+- Front page: (e.g. project/app title, group-member names, study numbers=
 - App vision: What does your app do?
     - A short visual layout of the screens. This should contain at least four screens not counting sign-in and sign-out. It can be drawings or more professional mockups.
 - user-story: A couple of user stories that capture the main content of the App
@@ -13,3 +13,13 @@ The Synopsis is a short document outlining the app vision and should contain:
 - Main Risks:
     - What will be the main risks in your proposed app and design (e.g. security)
 
+### Title: "???"
+
+| App project 10 |
+| --------- |
+
+| Navn                    | Studienummer |
+| ----------------------- | ------------ |
+| Lasse Borring Petersen  | 202208165    |
+| Benjamin Harboe Strunge | 202209864    |
+| Esben Inglev            | 202210050    |
