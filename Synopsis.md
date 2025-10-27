@@ -13,7 +13,7 @@ The Synopsis is a short document outlining the app vision and should contain:
 - Main Risks:
     - What will be the main risks in your proposed app and design (e.g. security)
 
-### Title: "???"
+### Title: "My Pokémons"
 
 | App project 10 |
 | --------- |
