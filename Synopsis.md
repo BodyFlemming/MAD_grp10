@@ -29,6 +29,19 @@ Each user has a personal profile where they can view account details and manage 
 - Profile:
   - As a user I want to navigate to the "My profile" page where I can view all the details about my account
 
+# Mockups
+### Profile page and collection page
+![Dashboard](img/ui_mocks-Dashboard.drawio.png)
+![Pokemons](img/ui_mocks-Pokemons.drawio.png)
+
+### Pokemon details and catch location
+![Details](img/ui_mocks-Details.drawio.png)
+![Map](img/ui_mocks-Map.drawio.png)
+
+### Pokemon catch page
+![Catch](img/ui_mocks-Catch.drawio.png)
+![CatchDone](img/ui_mocks-Catch%20done.drawio.png)
+
 # List of Technologies
 For the database, we will be using Google's firestore database. This database is easy to work with, since its all in the cloud, and there is native support for using it with android apps. 
 It supports multiple ways of querying for data, like shallow queries to only receive data at the document level, as well as sorting, filtering and limits to your queries. You can also use realtime listeners to continuously update the data that your clients have fetched. 
