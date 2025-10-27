@@ -18,6 +18,8 @@ Users can catch random Pokémon through the app, store them in their collection,
 
 Each user has a personal profile where they can view account details and manage their collection. The app aims to create a light, gamified experience where users can feel a sense of progression and ownership over their Pokémon while exploring real-world locations through GPS.
 
+<div style="page-break-before: always;"></div>
+
 ## User-stories
 
 - Auth:
@@ -32,6 +34,8 @@ Each user has a personal profile where they can view account details and manage 
 - Profile:
   - As a user I want to navigate to the "My profile" page where I can view all the details about my account
 
+<div style="page-break-before: always;"></div>
+
 ## Mockups
 
 ### Profile page and collection page
@@ -44,10 +48,14 @@ Each user has a personal profile where they can view account details and manage 
 <img src="img/ui_mocks-Details.drawio.png" alt="Details" width="200"/>
 <img src="img/ui_mocks-Map.drawio.png" alt="Map" width="200"/>
 
+<div style="page-break-before: always;"></div>
+
 ### Pokemon catch page
 
 <img src="img/ui_mocks-Catch.drawio.png" alt="Catch" width="200"/>
 <img src="img/ui_mocks-Catch%20done.drawio.png" alt="Catch done" width="200"/>
+
+<div style="page-break-before: always;"></div>
 
 ## List of Technologies
 
