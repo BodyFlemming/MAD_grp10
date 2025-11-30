@@ -13,14 +13,19 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.mymons.composable.navigation.ui.DrawerContent
-import com.example.mymons.composable.navigation.ui.TopBar
+import com.example.mymons.models.Horse
+import com.example.mymons.services.HorseService
+import com.example.mymons.ui.navigation.DrawerContent
+import com.example.mymons.ui.navigation.TopBar
 import com.example.mymons.ui.theme.MyMonsTheme
 import kotlinx.coroutines.launch
 
@@ -80,8 +85,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun FirstItem(navigate: () -> Unit) {
+    val state = remember { mutableStateOf(listOf<Horse>()) }
+    LaunchedEffect(Unit) {
+        state.value = HorseService().getHorses()
+    }
+
     Column {
-        Text("First Item")
+        Text(state.value.firstOrNull()?.id ?: "Loading...")
+        Text(state.value.firstOrNull()?.name ?: "Loading...")
         Button(onClick = navigate) {
             Text("Navigate to Second Item")
         }

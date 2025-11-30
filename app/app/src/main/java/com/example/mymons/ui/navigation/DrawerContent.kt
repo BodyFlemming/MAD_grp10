@@ -1,4 +1,4 @@
-package com.example.mymons.composable.navigation.ui
+package com.example.mymons.ui.navigation
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerState
@@ -28,7 +28,6 @@ fun DrawerContent(
             selected = false,
             onClick = {
                 navController.navigate("firstItem")
-                // Close drawer after clicking
                 scope.launch { drawerState.close() }
             }
         )

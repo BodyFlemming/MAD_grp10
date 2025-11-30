@@ -1,4 +1,4 @@
-package com.example.mymons.composable.navigation.ui
+package com.example.mymons.ui.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -17,7 +17,7 @@ fun TopBar(onMenuClicked: () -> Unit) {
         navigationIcon = {
             // The Hamburger Menu Button
             IconButton(onClick = {
-                onMenuClicked
+                onMenuClicked()
             }) {
                 Icon(
                     imageVector = Icons.Default.Menu,
