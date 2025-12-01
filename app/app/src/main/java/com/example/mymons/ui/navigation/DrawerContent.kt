@@ -27,17 +27,26 @@ fun DrawerContent(
             label = { Text("First Item") },
             selected = false,
             onClick = {
-                navController.navigate("firstItem")
+                navController.navigate("horses")
                 scope.launch { drawerState.close() }
             }
         )
-        NavigationDrawerItem(
-            label = { Text("Second Item") },
-            selected = false,
-            onClick = {
-                navController.navigate("secondItem")
-                scope.launch { drawerState.close() }
-            }
-        )
+
+//        NavigationDrawerItem(
+//            label = { Text("First Item") },
+//            selected = false,
+//            onClick = {
+//                navController.navigate("firstItem")
+//                scope.launch { drawerState.close() }
+//            }
+//        )
+//        NavigationDrawerItem(
+//            label = { Text("Second Item") },
+//            selected = false,
+//            onClick = {
+//                navController.navigate("secondItem")
+//                scope.launch { drawerState.close() }
+//            }
+//        )
     }
 }
