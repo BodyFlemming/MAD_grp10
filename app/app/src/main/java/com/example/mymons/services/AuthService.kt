@@ -20,7 +20,7 @@ class AuthService : AuthServiceInterface {
     override suspend fun signup(email: Email, password: Password): AuthResult {
         return try {
             val result = auth.createUserWithEmailAndPassword(email.value, password.value)
-                .await() // Suspends until Firebase finishes
+                .await()
                 .user
                 ?: return AuthResult(null, Status.ERROR)
 
@@ -42,7 +42,6 @@ class AuthService : AuthServiceInterface {
                 .user
                 ?: return AuthResult(null, Status.ERROR)
 
-            // Converts the Firebase email string back into your Domain Email object
             val emailDomain = result.email?.let { Email(it) }
                 ?: return AuthResult(null, Status.ERROR)
 
