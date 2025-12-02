@@ -18,11 +18,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mymons.models.Horse
+import com.example.mymons.models.Mon
 import com.example.mymons.services.AuthService
 import com.example.mymons.services.HorseService
+import com.example.mymons.services.MonService
 import com.example.mymons.ui.auth.SignIn
 import com.example.mymons.ui.auth.SignUp
 import com.example.mymons.ui.horse.Horses
+import com.example.mymons.ui.mons.Mons
 import com.example.mymons.ui.navigation.DrawerContent
 import com.example.mymons.ui.navigation.TopBar
 import com.example.mymons.ui.theme.MyMonsTheme
@@ -44,13 +47,13 @@ class MainActivity : ComponentActivity() {
                 val scope = rememberCoroutineScope()
 
                 // Authentication setup
-                val isLoggedIn = remember { mutableStateOf(false) }
+                val isLoggedIn = remember { mutableStateOf(true) }
                 val authService: AuthService = remember { AuthService() }
                 LaunchedEffect(key1 = isLoggedIn.value) {
                     if (!isLoggedIn.value) {
                         navController.navigate(route = "signIn")
                     } else {
-                        navController.navigate(route = "horses")
+                        navController.navigate(route = "mons")
                     }
                 }
 
@@ -99,6 +102,19 @@ class MainActivity : ComponentActivity() {
                                     }
 
                                     Horses(horses.value)
+                                }
+                            }
+
+                            composable(route = "mons") {
+                                if (isLoggedIn.value) {
+                                    val monService: MonService = remember { MonService() }
+                                    val mons = remember { mutableStateOf(listOf<Mon>()) }
+
+                                    LaunchedEffect(Unit) {
+                                        mons.value = monService.getMons()
+                                    }
+
+                                    Mons(mons.value)
                                 }
                             }
                         }

@@ -21,8 +21,8 @@ import com.example.mymons.services.AuthService
 @Composable
 fun Horses(horses: List<Horse>) {
     LazyColumn(
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+//        contentPadding = PaddingValues(16.dp),
+//        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(horses) { horse ->
             HorseItem(horse)
