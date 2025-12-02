@@ -7,7 +7,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import com.example.mymons.ui.theme.Black
+import com.example.mymons.ui.theme.White
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
@@ -15,7 +18,6 @@ fun TopBar(onMenuClicked: () -> Unit) {
     CenterAlignedTopAppBar(
         title = { Text("My Mons") },
         navigationIcon = {
-            // The Hamburger Menu Button
             IconButton(onClick = {
                 onMenuClicked()
             }) {
@@ -24,6 +26,11 @@ fun TopBar(onMenuClicked: () -> Unit) {
                     contentDescription = "Menu"
                 )
             }
-        }
+        },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = Black,
+            titleContentColor = White,
+            navigationIconContentColor = White
+        )
     )
 }

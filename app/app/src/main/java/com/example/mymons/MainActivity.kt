@@ -13,25 +13,23 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.mymons.models.Horse
 import com.example.mymons.models.Mon
 import com.example.mymons.services.AuthService
-import com.example.mymons.services.HorseService
 import com.example.mymons.services.MonService
 import com.example.mymons.ui.auth.SignIn
 import com.example.mymons.ui.auth.SignUp
-import com.example.mymons.ui.horse.Horses
 import com.example.mymons.ui.mons.Mons
 import com.example.mymons.ui.navigation.DrawerContent
 import com.example.mymons.ui.navigation.TopBar
 import com.example.mymons.ui.theme.MyMonsTheme
+import com.example.mymons.ui.userDashboard.UserDashboardPage
 import kotlinx.coroutines.launch
 
-// TODO Rename everything Horse to Pokemon
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,30 +47,32 @@ class MainActivity : ComponentActivity() {
                 // Authentication setup
                 val isLoggedIn = remember { mutableStateOf(true) }
                 val authService: AuthService = remember { AuthService() }
-                LaunchedEffect(key1 = isLoggedIn.value) {
-                    if (!isLoggedIn.value) {
-                        navController.navigate(route = "signIn")
-                    } else {
-                        navController.navigate(route = "mons")
-                    }
-                }
+//                LaunchedEffect(key1 = isLoggedIn.value) {
+//                    if (!isLoggedIn.value) {
+//                        navController.navigate(route = "signIn")
+//                    } else {
+//                        navController.navigate(route = "mons")
+//                    }
+//                }
 
                 ModalNavigationDrawer(drawerState = drawerState, drawerContent = {
                     DrawerContent(navController, scope, drawerState)
                 }) {
-                    Scaffold(topBar = {
-                        TopBar(onMenuClicked = {
-                            scope.launch {
-                                if (drawerState.isClosed) drawerState.open() else drawerState.close()
-                            }
-                        })
-                    }) { innerPadding ->
+                    Scaffold(
+                        containerColor = Color(0xFF202636),
+                        topBar = {
+                            TopBar(onMenuClicked = {
+                                scope.launch {
+                                    if (drawerState.isClosed) drawerState.open() else drawerState.close()
+                                }
+                            })
+                        }) { innerPadding ->
                         NavHost(
                             navController = navController,
-                            startDestination = "signIn",
+                            startDestination = "mons",
                             Modifier
                                 .padding(innerPadding)
-                                .padding(horizontal = 16.dp)
+                                .padding(horizontal = 16.dp, vertical = 16.dp),
                         ) {
                             composable(route = "signUp") {
                                 SignUp { email, password ->
@@ -92,19 +92,6 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
 
-                            composable(route = "horses") {
-                                if (isLoggedIn.value) {
-                                    val horseService: HorseService = remember { HorseService() }
-                                    val horses = remember { mutableStateOf(listOf<Horse>()) }
-
-                                    LaunchedEffect(Unit) {
-                                        horses.value = horseService.getHorses()
-                                    }
-
-                                    Horses(horses.value)
-                                }
-                            }
-
                             composable(route = "mons") {
                                 if (isLoggedIn.value) {
                                     val monService: MonService = remember { MonService() }
@@ -115,6 +102,13 @@ class MainActivity : ComponentActivity() {
                                     }
 
                                     Mons(mons.value)
+                                }
+                            }
+
+                            composable(route = "users") {
+                                if (isLoggedIn.value) {
+                                    UserDashboardPage()
+//                                    Mons(mons.value)
                                 }
                             }
                         }

@@ -24,10 +24,19 @@ fun DrawerContent(
         HorizontalDivider()
 
         NavigationDrawerItem(
-            label = { Text("First Item") },
+            label = { Text("My mons") },
             selected = false,
             onClick = {
-                navController.navigate("horses")
+                navController.navigate("mons")
+                scope.launch { drawerState.close() }
+            }
+        )
+
+        NavigationDrawerItem(
+            label = { Text("User") },
+            selected = false,
+            onClick = {
+                navController.navigate("users")
                 scope.launch { drawerState.close() }
             }
         )

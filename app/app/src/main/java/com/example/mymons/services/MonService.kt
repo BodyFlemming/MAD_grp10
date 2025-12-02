@@ -22,6 +22,13 @@ class MonService : MonServiceInterface {
         val monsFS = mons.documents.mapNotNull { documentSnapshot ->
             documentSnapshot.toObject<MonFS>()
         }
-        return monsFS.map { Mon(it.id ?: throw IllegalStateException("ID IS NULL"), name = it.name) }
+        return monsFS.map {
+            Mon(
+                it.id ?: throw IllegalStateException("ID IS NULL"),
+                name = it.name,
+                frontDefault = it.frontDefault,
+                caughtDate = it.caughtDate.toDate()
+            )
+        }
     }
 }
