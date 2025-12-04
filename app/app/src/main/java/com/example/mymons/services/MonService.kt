@@ -23,8 +23,11 @@ class MonService : MonServiceInterface {
             documentSnapshot.toObject<MonFS>()
         }
         return monsFS.map {
+            val idAsInt = it.id?.toIntOrNull()
+                ?: throw IllegalStateException("Mon ID is null or not a valid integer: ${it.id}")
+
             Mon(
-                it.id ?: throw IllegalStateException("ID IS NULL"),
+                idAsInt,
                 name = it.name,
                 frontDefault = it.frontDefault,
                 caughtDate = it.caughtDate.toDate()
