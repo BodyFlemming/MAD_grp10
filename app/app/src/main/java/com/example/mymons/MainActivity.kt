@@ -24,16 +24,20 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.mymons.models.Mon
+import com.example.mymons.models.auth.Email
+import com.example.mymons.models.auth.User
 import com.example.mymons.services.AuthService
 import com.example.mymons.services.MonService
 import com.example.mymons.ui.auth.SignIn
 import com.example.mymons.ui.auth.SignUp
+import com.example.mymons.ui.catchMons.CatchPage
 import com.example.mymons.ui.mons.Mons
 import com.example.mymons.ui.navigation.DrawerContent
 import com.example.mymons.ui.navigation.TopBar
 import com.example.mymons.ui.theme.MyMonsTheme
 import com.example.mymons.ui.userDashboard.UserDashboardPage
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -125,7 +129,7 @@ class MainActivity : ComponentActivity() {
                                         mons.value = monService.getMons()
                                     }
 
-                                    Mons(mons.value){ mon ->
+                                    Mons(mons.value) { mon ->
                                         selectedMon = mon
                                         navController.navigate("monDetail")
                                     }
@@ -151,14 +155,21 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
 
+                            composable(route = "catchMons") {
+                                if (isLoggedIn.value) {
+                                    CatchPage()
+                                }
+                            }
+
                             composable(route = "users") {
                                 if (isLoggedIn.value) {
-                                    UserDashboardPage(onSignOut = {
-                                        isLoggedIn.value = false
-                                        navController.navigate("signIn") {
-                                            popUpTo("users") { inclusive = true }
-                                        }
-                                    })
+                                    UserDashboardPage(
+                                         onSignOut = {
+                                            isLoggedIn.value = false
+                                            navController.navigate("signIn") {
+                                                popUpTo("users") { inclusive = true }
+                                            }
+                                        })
 //                                    Mons(mons.value)
                                 }
                             }

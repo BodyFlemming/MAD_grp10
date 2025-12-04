@@ -1,6 +1,7 @@
 package com.example.mymons.services
 
 import com.example.mymons.firestoreModels.MonFS
+import com.example.mymons.firestoreModels.toMonFS
 import com.example.mymons.models.Mon
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,12 +22,15 @@ class MonService : MonServiceInterface {
         const val USER_COLLECTION_NAME = "users"
     }
 
+    private fun getUserMonsCollection(uid: String) =
+        db.collection(USER_COLLECTION_NAME)
+            .document(uid)
+            .collection(MON_COLLECTION_NAME)
+
     override suspend fun getMons(): List<Mon> {
         val uid = auth.currentUser?.uid ?: return emptyList()
 
-        val userMonDoc = db.collection(USER_COLLECTION_NAME)
-            .document(uid)
-            .collection(MON_COLLECTION_NAME)
+        val userMonDoc = getUserMonsCollection(uid)
             .get()
             .await()
 
@@ -36,12 +40,30 @@ class MonService : MonServiceInterface {
 
         return monsFS.map {
             Mon(
-                it.id ?: throw IllegalStateException("ID IS NULL"),
+                id = it.id.toString(),
                 name = it.name,
                 frontDefault = it.frontDefault,
                 caughtDate = it.caughtDate.toDate(),
-                catchLoc = GeoPoint(56.15674, 10.21076)
+                catchLoc = it.catchLoc
             )
+        }
+    }
+
+    suspend fun addMon(mon: Mon): Boolean {
+        val uid = auth.currentUser?.uid ?: return false // Cannot save if not logged in
+
+        // Convert the application Mon model to the Firestore MonFS model
+        val monFS = mon.toMonFS()
+
+        return try {
+            // Use add() to automatically generate a document ID
+            getUserMonsCollection(uid)
+                .add(monFS)
+                .await()
+            true
+        } catch (e: Exception) {
+            println("Error saving Mon to Firestore: ${e.message}")
+            false
         }
     }
 }
