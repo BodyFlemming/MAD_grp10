@@ -45,15 +45,15 @@ class MainActivity : ComponentActivity() {
                 val scope = rememberCoroutineScope()
 
                 // Authentication setup
-                val isLoggedIn = remember { mutableStateOf(true) }
+                val isLoggedIn = remember { mutableStateOf(false) }
                 val authService: AuthService = remember { AuthService() }
-//                LaunchedEffect(key1 = isLoggedIn.value) {
-//                    if (!isLoggedIn.value) {
-//                        navController.navigate(route = "signIn")
-//                    } else {
-//                        navController.navigate(route = "mons")
-//                    }
-//                }
+                LaunchedEffect(key1 = isLoggedIn.value) {
+                    if (!isLoggedIn.value) {
+                        navController.navigate(route = "signIn")
+                    } else {
+                        navController.navigate(route = "mons")
+                    }
+                }
 
                 ModalNavigationDrawer(drawerState = drawerState, drawerContent = {
                     DrawerContent(navController, scope, drawerState, isLoggedIn.value)
