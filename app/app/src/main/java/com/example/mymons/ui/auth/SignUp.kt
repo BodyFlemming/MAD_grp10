@@ -20,8 +20,8 @@ import com.example.mymons.models.auth.Password
 
 @Composable
 fun SignUp(signUp: (email: Email, password: Password) -> Unit) {
-    var email by remember { mutableStateOf("test1@net.dk") }
-    var password by remember { mutableStateOf("1234qweQWE!") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
 

@@ -12,6 +12,4 @@ class PokeApiService : PokeApiServiceInterface {
     companion object {
         const val POKEAPI_URL = "https://pokeapi.co/api/v2/"
     }
-
-
 }

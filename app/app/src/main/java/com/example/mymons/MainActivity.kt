@@ -45,15 +45,15 @@ class MainActivity : ComponentActivity() {
                 val scope = rememberCoroutineScope()
 
                 // Authentication setup
-                val isLoggedIn = remember { mutableStateOf(true) }
+                val isLoggedIn = remember { mutableStateOf(false) }
                 val authService: AuthService = remember { AuthService() }
-//                LaunchedEffect(key1 = isLoggedIn.value) {
-//                    if (!isLoggedIn.value) {
-//                        navController.navigate(route = "signIn")
-//                    } else {
-//                        navController.navigate(route = "mons")
-//                    }
-//                }
+                LaunchedEffect(key1 = isLoggedIn.value) {
+                    if (!isLoggedIn.value) {
+                        navController.navigate(route = "signIn")
+                    } else {
+                        navController.navigate(route = "mons")
+                    }
+                }
 
                 ModalNavigationDrawer(drawerState = drawerState, drawerContent = {
                     DrawerContent(navController, scope, drawerState, isLoggedIn.value)
@@ -84,12 +84,16 @@ class MainActivity : ComponentActivity() {
                             }
 
                             composable(route = "signIn") {
-                                SignIn { email, password ->
-                                    scope.launch {
-                                        val res = authService.signIn(email, password)
-                                        isLoggedIn.value = res.isOk()
-                                    }
-                                }
+                                SignIn(
+                                    signIn = { email, password ->
+                                        scope.launch {
+                                            val res = authService.signIn(email, password)
+                                            isLoggedIn.value = res.isOk()
+                                        }
+                                    },
+                                    onNavigateToSingUp = {
+                                        navController.navigate("signUp")
+                                    })
                             }
 
                             composable(route = "mons") {
