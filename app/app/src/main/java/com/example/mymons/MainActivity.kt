@@ -84,12 +84,16 @@ class MainActivity : ComponentActivity() {
                             }
 
                             composable(route = "signIn") {
-                                SignIn { email, password ->
-                                    scope.launch {
-                                        val res = authService.signIn(email, password)
-                                        isLoggedIn.value = res.isOk()
-                                    }
-                                }
+                                SignIn(
+                                    signIn = { email, password ->
+                                        scope.launch {
+                                            val res = authService.signIn(email, password)
+                                            isLoggedIn.value = res.isOk()
+                                        }
+                                    },
+                                    onNavigateToSingUp = {
+                                        navController.navigate("signUp")
+                                    })
                             }
 
                             composable(route = "mons") {

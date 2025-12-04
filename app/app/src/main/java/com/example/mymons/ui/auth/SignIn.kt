@@ -19,7 +19,10 @@ import com.example.mymons.models.auth.Email
 import com.example.mymons.models.auth.Password
 
 @Composable
-fun SignIn(signIn: (email: Email, password: Password) -> Unit) {
+fun SignIn(
+    signIn: (email: Email, password: Password) -> Unit,
+    onNavigateToSingUp: () -> Unit
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -51,6 +54,12 @@ fun SignIn(signIn: (email: Email, password: Password) -> Unit) {
             }
         }) {
             Text("Sign In")
+        }
+
+        Button(onClick = {
+            onNavigateToSingUp()
+        }) {
+            Text("Sign Up")
         }
     }
 }
