@@ -1,7 +1,6 @@
 package com.example.mymons
 
 import CatchLocationScreen
-import MapScreen
 import MonDetailScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -144,10 +143,6 @@ class MainActivity : ComponentActivity() {
                                     })
 //                                    Mons(mons.value)
                                 }
-                            }
-
-                            composable(route = "map") {
-                                MapScreen()
                             }
                         }
                     }

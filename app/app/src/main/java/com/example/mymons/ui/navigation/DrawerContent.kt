@@ -43,11 +43,6 @@ fun DrawerContent(
                 }
             )
 
-            NavigationDrawerItem(
-                label = { Text("Map") },
-                selected = false,
-                onClick = { navController.navigate("map") }
-            )
         } else {
             NavigationDrawerItem(
                 label = { Text("Sign In") },
