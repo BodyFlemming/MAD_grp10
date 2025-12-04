@@ -22,7 +22,7 @@ fun UserDashboardPage(user: User, onSignOut: () -> Unit) {
         verticalArrangement = Arrangement.spacedBy(64.dp)
     ) {
         ImageCard("") {
-            Text("User name", fontSize = 30.sp, color = White)
+            Text(user.userName, fontSize = 30.sp, color = White)
         }
 
         BulletList(

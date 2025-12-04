@@ -33,6 +33,7 @@ class UserService : UserServiceInterface {
         return User(
             id = userFS.id ?: uid,
             email = Email(userFS.email),
+            userName = userFS.userName,
             creationDay = userFS.creationDate.toDate(),
             monCount = userFS.monCount,
             monShinyCount = userFS.monShinyCount

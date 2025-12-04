@@ -23,6 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mymons.models.Mon
+import com.example.mymons.models.auth.User
 import com.example.mymons.services.AuthService
 import com.example.mymons.services.MonService
 import com.example.mymons.ui.auth.SignIn
@@ -111,7 +112,7 @@ class MainActivity : ComponentActivity() {
                                         mons.value = monService.getMons()
                                     }
 
-                                    Mons(mons.value){ mon ->
+                                    Mons(mons.value) { mon ->
                                         selectedMon = mon
                                         navController.navigate("monDetail")
                                     }
@@ -139,12 +140,20 @@ class MainActivity : ComponentActivity() {
 
                             composable(route = "users") {
                                 if (isLoggedIn.value) {
-                                    UserDashboardPage(onSignOut = {
-                                        isLoggedIn.value = false
-                                        navController.navigate("signIn") {
-                                            popUpTo("users") { inclusive = true }
-                                        }
-                                    })
+                                    UserDashboardPage(
+                                        user = User(
+                                            id = "2",
+                                            email = TODO(),
+                                            userName = TODO(),
+                                            creationDay = TODO(),
+                                            monCount = TODO(),
+                                            monShinyCount = TODO(),
+                                        ), onSignOut = {
+                                            isLoggedIn.value = false
+                                            navController.navigate("signIn") {
+                                                popUpTo("users") { inclusive = true }
+                                            }
+                                        })
 //                                    Mons(mons.value)
                                 }
                             }
