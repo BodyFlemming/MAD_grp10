@@ -53,6 +53,7 @@ class AuthService : AuthServiceInterface {
     }
 
     override suspend fun signIn(email: Email, password: Password): AuthResult {
+        println("Entering signup")
         return try {
             val result = auth.signInWithEmailAndPassword(email.value, password.value)
                 .await()
