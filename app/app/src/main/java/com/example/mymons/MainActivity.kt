@@ -23,6 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.mymons.models.Mon
+import com.example.mymons.models.auth.Email
 import com.example.mymons.models.auth.User
 import com.example.mymons.services.AuthService
 import com.example.mymons.services.MonService
@@ -34,6 +35,7 @@ import com.example.mymons.ui.navigation.TopBar
 import com.example.mymons.ui.theme.MyMonsTheme
 import com.example.mymons.ui.userDashboard.UserDashboardPage
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,11 +145,13 @@ class MainActivity : ComponentActivity() {
                                     UserDashboardPage(
                                         user = User(
                                             id = "2",
-                                            email = TODO(),
-                                            userName = TODO(),
-                                            creationDay = TODO(),
-                                            monCount = TODO(),
-                                            monShinyCount = TODO(),
+                                            email = Email(
+                                                value = "TODO()"
+                                            ),
+                                            userName = "TODO()",
+                                            creationDay = Date(),
+                                            monCount = 0,
+                                            monShinyCount = 0,
                                         ), onSignOut = {
                                             isLoggedIn.value = false
                                             navController.navigate("signIn") {
