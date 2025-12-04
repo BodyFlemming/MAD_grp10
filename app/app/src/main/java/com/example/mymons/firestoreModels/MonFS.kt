@@ -10,7 +10,8 @@ data class MonFS(
     val name: String = "",
     val frontDefault: String = "",
     val caughtDate: Timestamp = Timestamp.now(),
-    val catchLoc: GeoPoint = GeoPoint(0.0, 0.0)
+    val catchLoc: GeoPoint = GeoPoint(0.0, 0.0),
+    val isShiny: Boolean = false
 )
 
 fun Mon.toMonFS(): MonFS {
@@ -18,9 +19,10 @@ fun Mon.toMonFS(): MonFS {
         // Set id to null so Firestore generates a new document ID on add()
         id = null,
         name = this.name,
-        frontDefault = this.frontDefault,
+        frontDefault = this.sprite,
         // Convert application Date to Firestore Timestamp
         caughtDate = Timestamp(this.caughtDate),
-        catchLoc = this.catchLoc
+        catchLoc = this.catchLoc,
+        isShiny = this.isShiny
     )
 }

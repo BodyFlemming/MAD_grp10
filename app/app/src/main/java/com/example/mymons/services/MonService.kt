@@ -5,7 +5,6 @@ import com.example.mymons.firestoreModels.toMonFS
 import com.example.mymons.models.Mon
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.toObject
 import kotlinx.coroutines.tasks.await
 
@@ -42,9 +41,10 @@ class MonService : MonServiceInterface {
             Mon(
                 id = it.id.toString(),
                 name = it.name,
-                frontDefault = it.frontDefault,
+                sprite = it.frontDefault,
                 caughtDate = it.caughtDate.toDate(),
-                catchLoc = it.catchLoc
+                catchLoc = it.catchLoc,
+                isShiny = it.isShiny
             )
         }
     }

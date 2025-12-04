@@ -37,13 +37,14 @@ fun Mons(mons: List<Mon>, onMonClick: (Mon) -> Unit) {
         }
     }
 }
+
 @Composable
 fun MonItem(mon: Mon, onClick: (mon: Mon) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp)
-            .clickable(onClick = { onClick(mon)}),
+            .clickable(onClick = { onClick(mon) }),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
@@ -61,7 +62,7 @@ fun MonItem(mon: Mon, onClick: (mon: Mon) -> Unit) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
-                model = mon.frontDefault,
+                model = mon.sprite,
                 contentDescription = "Pokemon sprite",
                 modifier = Modifier.size(60.dp)
             )

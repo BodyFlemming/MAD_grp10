@@ -1,8 +1,25 @@
 package com.example.mymons.ui.catchMons
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -13,12 +30,13 @@ import com.example.mymons.models.Mon
 import com.example.mymons.services.MonService
 import com.example.mymons.services.PokeApiService
 import com.example.mymons.services.PokeApiServiceInterface
-import kotlin.random.Random
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 // Injecting the service is best practice. Here, we'll instantiate it for simplicity.
 private val pokeApiService: PokeApiServiceInterface = PokeApiService()
 private val monService: MonService = MonService()
+
 @Composable
 fun CatchPage() {
     // State to hold the result of the catch operation
@@ -92,13 +110,17 @@ fun CatchPage() {
                 if (isLoading) {
                     CircularProgressIndicator()
                 } else if (errorMessage != null) {
-                    Text(errorMessage!!, color = MaterialTheme.colorScheme.error, modifier = Modifier.padding(16.dp))
+                    Text(
+                        errorMessage!!,
+                        color = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.padding(16.dp)
+                    )
                 } else if (caughtMon != null) {
                     // Display the caught Pokémon details
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         // Use Coil for image loading from the URL
                         AsyncImage(
-                            model = caughtMon!!.frontDefault,
+                            model = caughtMon!!.sprite,
                             contentDescription = "${caughtMon!!.name} sprite",
                             contentScale = ContentScale.Fit,
                             modifier = Modifier.size(150.dp)
@@ -115,7 +137,10 @@ fun CatchPage() {
                         )
                     }
                 } else {
-                    Text("Click the button to try and catch a Pokémon!", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(
+                        "Click the button to try and catch a Pokémon!",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
             }
         }

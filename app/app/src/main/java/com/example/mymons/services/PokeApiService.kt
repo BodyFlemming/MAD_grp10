@@ -37,7 +37,8 @@ class PokeApiService : PokeApiServiceInterface {
             val response: PokemonApiResponse = client.get(url).body()
 
             // Map the API response to the data class
-            return response.toMon()
+            val isShiny = (0..100).random() < SHINY_ODDS
+            return response.toMon(isShiny)
         } catch (e: Exception) {
             println("Error fetching Pokémon ID $id: ${e.message}")
             throw e
@@ -48,5 +49,6 @@ class PokeApiService : PokeApiServiceInterface {
         const val POKEAPI_URL = "https://pokeapi.co/api/v2/"
         const val MAX_POKEMON_ID = 1025 // Pokemon count in api, max value
         const val MIN_POKEMON_ID = 1
+        const val SHINY_ODDS = 20
     }
 }
