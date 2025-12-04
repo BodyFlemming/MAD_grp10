@@ -14,9 +14,9 @@ import com.example.mymons.ui.theme.White
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun TopBar(onMenuClicked: () -> Unit) {
+fun TopBar(title: String, onMenuClicked: () -> Unit) {
     CenterAlignedTopAppBar(
-        title = { Text("My Mons") },
+        title = { Text(title) },
         navigationIcon = {
             IconButton(onClick = {
                 onMenuClicked()

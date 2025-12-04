@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.mymons.models.Mon
 import com.example.mymons.services.AuthService
@@ -41,6 +42,18 @@ class MainActivity : ComponentActivity() {
             MyMonsTheme {
                 // Remembers the current page
                 val navController = rememberNavController()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
+
+                val currentPage = when (currentRoute) {
+                    "mons" -> "My Mons"
+                    "signIn" -> "Sign In"
+                    "signUp" -> "Sign Up"
+                    "monDetail" -> "Mon Detail"
+                    "catchLocation" -> "Catch Location"
+                    "users" -> "User Dashboard"
+                    else -> "My Mons"
+                }
 
                 // Remembers if drawer is closed or open
                 val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -67,7 +80,9 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         containerColor = Color(0xFF202636),
                         topBar = {
-                            TopBar(onMenuClicked = {
+                            TopBar(
+                                title = currentPage,
+                                onMenuClicked = {
                                 scope.launch {
                                     if (drawerState.isClosed) drawerState.open() else drawerState.close()
                                 }
