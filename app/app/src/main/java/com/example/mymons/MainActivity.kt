@@ -60,7 +60,6 @@ class MainActivity : ComponentActivity() {
 
                 // Used to run the open/close animation of the drawer
                 val scope = rememberCoroutineScope()
-
                 var selectedMon by remember { mutableStateOf<Mon?>(null) }
 
                 // Authentication setup

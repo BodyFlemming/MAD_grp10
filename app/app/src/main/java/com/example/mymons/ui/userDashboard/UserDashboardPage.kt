@@ -8,14 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mymons.data.dto.UserFS
 import com.example.mymons.services.AuthService
 import com.example.mymons.ui.global.BulletList
 import com.example.mymons.ui.global.ImageCard
 import com.example.mymons.ui.theme.White
 
 @Composable
-fun UserDashboardPage(onSignOut: () -> Unit) {
-    val dummyUserName = "Benjamin"
+fun UserDashboardPage(user: UserFS, onSignOut: () -> Unit) {
     val dummyAmountOfMons = 22
     val dummyAmountOfShinies = 2
 
@@ -24,13 +24,13 @@ fun UserDashboardPage(onSignOut: () -> Unit) {
     Column(
         verticalArrangement = Arrangement.spacedBy(64.dp)
     ) {
-        ImageCard("") {
-            Text("User name", fontSize = 30.sp, color = White)
+        ImageCard(user.pokemonAvatar) {
+            Text(user.name, fontSize = 30.sp, color = White)
         }
 
         BulletList(
             listOf(
-                "User created:\t${dummyUserName}",
+                "Email:\t${user.email}",
                 "Number of Mons:\t${dummyAmountOfMons}",
                 "Number of shinies:\t${dummyAmountOfShinies}"
             )
