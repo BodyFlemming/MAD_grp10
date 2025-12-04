@@ -96,9 +96,9 @@ class MainActivity : ComponentActivity() {
                                 .padding(horizontal = 16.dp, vertical = 16.dp),
                         ) {
                             composable(route = "signUp") {
-                                SignUp { email, password ->
+                                SignUp { name, email, password, avatar ->
                                     scope.launch {
-                                        val res = authService.signup(email, password)
+                                        val res = authService.signup(name, email, password, avatar)
                                         isLoggedIn.value = res.isOk()
                                     }
                                 }

@@ -12,7 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
 interface AuthServiceInterface {
-    suspend fun signup(email: Email, password: Password): AuthResult
+    suspend fun signup(name: String, email: Email, password: Password, avatar: String): AuthResult
     suspend fun signIn(email: Email, password: Password): AuthResult
     fun signOut()
 }
@@ -21,7 +21,7 @@ class AuthService : AuthServiceInterface {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    override suspend fun signup(email: Email, password: Password): AuthResult {
+    override suspend fun signup(name: String, email: Email, password: Password, avatar: String): AuthResult {
         return try {
             val result = auth.createUserWithEmailAndPassword(email.value, password.value)
                 .await()
@@ -31,6 +31,8 @@ class AuthService : AuthServiceInterface {
             val newUserFS = UserFS(
                 id = result.uid,
                 email = email.value,
+                name = name,
+                pokemonAvatar = avatar,
                 creationDate = Timestamp.now(),
             )
 
