@@ -7,7 +7,7 @@ import java.util.Date
 import com.google.firebase.firestore.GeoPoint
 
 data class Mon(
-    val id: Int,
+    val id: String,
     val name: String,
     val frontDefault: String,
     val caughtDate: java.util.Date,
@@ -29,10 +29,10 @@ data class Sprites(
 
 fun PokemonApiResponse.toMon(): Mon {
     return Mon(
-        id = this.id,
+        id = this.id.toString(),
         name = this.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }, // Capitalize name
         frontDefault = this.sprites.frontDefault ?: "https://placehold.co/150x150/EEEEEE/333333?text=?", // Provide fallback URL
         caughtDate = Date(),
-        catchLoc = GeoPoint(0.0, 0.0) // placeholder
+        catchLoc = GeoPoint(56.15674, 10.21076)  // placeholder
     )
 }
