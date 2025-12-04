@@ -1,11 +1,14 @@
 package com.example.mymons.services
 
+import com.example.mymons.data.dto.UserFS
 import com.example.mymons.models.auth.AuthResult
 import com.example.mymons.models.auth.Email
 import com.example.mymons.models.auth.Password
 import com.example.mymons.models.auth.Status
 import com.example.mymons.models.auth.User
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
 interface AuthServiceInterface {
@@ -16,6 +19,7 @@ interface AuthServiceInterface {
 
 class AuthService : AuthServiceInterface {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     override suspend fun signup(email: Email, password: Password): AuthResult {
         return try {
@@ -24,6 +28,17 @@ class AuthService : AuthServiceInterface {
                 .user
                 ?: return AuthResult(null, Status.ERROR)
 
+            val newUserFS = UserFS(
+                id = result.uid,
+                email = email.value,
+                creationDate = Timestamp.now(),
+            )
+
+            db.collection("users")
+                .document(result.uid)
+                .set(newUserFS)
+                .await()
+
             val emailObj = result.email?.let { Email(it) }
                 ?: return AuthResult(null, Status.ERROR)
 
@@ -31,6 +46,7 @@ class AuthService : AuthServiceInterface {
 
             AuthResult(user, Status.OK)
         } catch (e: Exception) {
+            android.util.Log.e("SignUp", "Error: ${e.message}")
             AuthResult(null, Status.ERROR)
         }
     }
