@@ -54,7 +54,9 @@ class AuthService : AuthServiceInterface {
                 email = emailObj,
                 creationDay = Date(),
                 monCount = 0,
-                monShinyCount = 0
+                monShinyCount = 0,
+                pokemonAvatar = avatar,
+                name = name
             )
 
             AuthResult(user, Status.OK)
@@ -87,7 +89,9 @@ class AuthService : AuthServiceInterface {
                 email = emailDomain,
                 creationDay = userFS.creationDate.toDate(),
                 monCount = userFS.monCount,
-                monShinyCount = userFS.monShinyCount
+                monShinyCount = userFS.monShinyCount,
+                pokemonAvatar = userFS.pokemonAvatar,
+                name = userFS.name
             )
 
             AuthResult(user, Status.OK)

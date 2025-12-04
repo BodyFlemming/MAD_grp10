@@ -35,7 +35,9 @@ class UserService : UserServiceInterface {
             email = Email(userFS.email),
             creationDay = userFS.creationDate.toDate(),
             monCount = userFS.monCount,
-            monShinyCount = userFS.monShinyCount
+            monShinyCount = userFS.monShinyCount,
+            pokemonAvatar = userFS.pokemonAvatar,
+            name = userFS.name
         )
     }
 }
