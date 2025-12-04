@@ -1,3 +1,11 @@
 package com.example.mymons.models.auth
 
-data class User(val id: String, val email: Email) {}
+import java.util.Date
+
+data class User(
+    val id: String,
+    val email: Email,
+    val creationDay: Date,
+    val monCount: Int,
+    val monShinyCount: Int
+) {}
