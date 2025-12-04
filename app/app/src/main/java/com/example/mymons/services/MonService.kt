@@ -43,7 +43,7 @@ class MonService : MonServiceInterface {
                 name = it.name,
                 frontDefault = it.frontDefault,
                 caughtDate = it.caughtDate.toDate(),
-                catchLoc = GeoPoint(56.15674,10.21076)
+                catchLoc = GeoPoint(56.15674, 10.21076)
             )
         }
     }

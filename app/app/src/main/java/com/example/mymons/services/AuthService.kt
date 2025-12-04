@@ -1,5 +1,6 @@
 package com.example.mymons.services
 
+import android.util.Log
 import com.example.mymons.data.dto.UserFS
 import com.example.mymons.models.auth.AuthResult
 import com.example.mymons.models.auth.Email
@@ -9,7 +10,9 @@ import com.example.mymons.models.auth.User
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.toObject
 import kotlinx.coroutines.tasks.await
+import java.util.Date
 
 interface AuthServiceInterface {
     suspend fun signup(email: Email, password: Password): AuthResult
@@ -31,7 +34,10 @@ class AuthService : AuthServiceInterface {
             val newUserFS = UserFS(
                 id = result.uid,
                 email = email.value,
+                userName = "UserName",
                 creationDate = Timestamp.now(),
+                monCount = 0,
+                monShinyCount = 0
             )
 
             db.collection("users")
@@ -42,27 +48,48 @@ class AuthService : AuthServiceInterface {
             val emailObj = result.email?.let { Email(it) }
                 ?: return AuthResult(null, Status.ERROR)
 
-            val user = User(result.uid, emailObj)
+            val user = User(
+                id = result.uid,
+                email = emailObj,
+                userName = "UserName",
+                creationDay = Date(),
+                monCount = 0,
+                monShinyCount = 0
+            )
 
             AuthResult(user, Status.OK)
         } catch (e: Exception) {
-            android.util.Log.e("SignUp", "Error: ${e.message}")
+            Log.e("SignUp", "Error: ${e.message}")
             AuthResult(null, Status.ERROR)
         }
     }
 
     override suspend fun signIn(email: Email, password: Password): AuthResult {
-        println("Entering signup")
         return try {
             val result = auth.signInWithEmailAndPassword(email.value, password.value)
                 .await()
                 .user
                 ?: return AuthResult(null, Status.ERROR)
 
+            val snapshot = db.collection("users")
+                .document(result.uid)
+                .get()
+                .await()
+
+            val userFS = snapshot.toObject<UserFS>()
+                ?: return AuthResult(null, Status.ERROR)
+
             val emailDomain = result.email?.let { Email(it) }
                 ?: return AuthResult(null, Status.ERROR)
 
-            val user = User(result.uid, emailDomain)
+            val user = User(
+                id = result.uid,
+                email = emailDomain,
+                userName = userFS.userName,
+                creationDay = userFS.creationDate.toDate(),
+                monCount = userFS.monCount,
+                monShinyCount = userFS.monShinyCount
+            )
 
             AuthResult(user, Status.OK)
         } catch (e: Exception) {
