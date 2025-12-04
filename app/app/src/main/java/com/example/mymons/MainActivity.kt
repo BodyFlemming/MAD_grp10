@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
 //                }
 
                 ModalNavigationDrawer(drawerState = drawerState, drawerContent = {
-                    DrawerContent(navController, scope, drawerState)
+                    DrawerContent(navController, scope, drawerState, isLoggedIn.value)
                 }) {
                     Scaffold(
                         containerColor = Color(0xFF202636),
@@ -107,7 +107,12 @@ class MainActivity : ComponentActivity() {
 
                             composable(route = "users") {
                                 if (isLoggedIn.value) {
-                                    UserDashboardPage()
+                                    UserDashboardPage(onSignOut = {
+                                        isLoggedIn.value = false
+                                        navController.navigate("signIn") {
+                                            popUpTo("users") { inclusive = true }
+                                        }
+                                    })
 //                                    Mons(mons.value)
                                 }
                             }

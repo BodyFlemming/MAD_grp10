@@ -17,45 +17,49 @@ import kotlinx.coroutines.launch
 fun DrawerContent(
     navController: NavHostController,
     scope: CoroutineScope,
-    drawerState: DrawerState
+    drawerState: DrawerState,
+    isLoggedIn: Boolean
 ) {
     ModalDrawerSheet {
         Text("My Mons App", modifier = Modifier.padding(16.dp))
         HorizontalDivider()
 
-        NavigationDrawerItem(
-            label = { Text("My mons") },
-            selected = false,
-            onClick = {
-                navController.navigate("mons")
-                scope.launch { drawerState.close() }
-            }
-        )
+        if (isLoggedIn) {
+            NavigationDrawerItem(
+                label = { Text("My mons") },
+                selected = false,
+                onClick = {
+                    navController.navigate("mons")
+                    scope.launch { drawerState.close() }
+                }
+            )
 
-        NavigationDrawerItem(
-            label = { Text("User") },
-            selected = false,
-            onClick = {
-                navController.navigate("users")
-                scope.launch { drawerState.close() }
-            }
-        )
+            NavigationDrawerItem(
+                label = { Text("User") },
+                selected = false,
+                onClick = {
+                    navController.navigate("users")
+                    scope.launch { drawerState.close() }
+                }
+            )
+        } else {
+            NavigationDrawerItem(
+                label = { Text("Sign In") },
+                selected = false,
+                onClick = {
+                    navController.navigate("signIn")
+                    scope.launch { drawerState.close() }
+                }
+            )
 
-//        NavigationDrawerItem(
-//            label = { Text("First Item") },
-//            selected = false,
-//            onClick = {
-//                navController.navigate("firstItem")
-//                scope.launch { drawerState.close() }
-//            }
-//        )
-//        NavigationDrawerItem(
-//            label = { Text("Second Item") },
-//            selected = false,
-//            onClick = {
-//                navController.navigate("secondItem")
-//                scope.launch { drawerState.close() }
-//            }
-//        )
+            NavigationDrawerItem(
+                label = { Text("Sign Up") },
+                selected = false,
+                onClick = {
+                    navController.navigate("signUp")
+                    scope.launch { drawerState.close() }
+                }
+            )
+        }
     }
 }
