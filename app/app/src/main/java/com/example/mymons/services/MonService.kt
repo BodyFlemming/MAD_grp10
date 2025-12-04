@@ -4,6 +4,7 @@ import com.example.mymons.firestoreModels.MonFS
 import com.example.mymons.models.Mon
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.toObject
 import kotlinx.coroutines.tasks.await
 
@@ -41,7 +42,8 @@ class MonService : MonServiceInterface {
                 idAsInt,
                 name = it.name,
                 frontDefault = it.frontDefault,
-                caughtDate = it.caughtDate.toDate()
+                caughtDate = it.caughtDate.toDate(),
+                catchLoc = GeoPoint(56.15674,10.21076)
             )
         }
     }
