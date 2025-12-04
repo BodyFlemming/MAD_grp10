@@ -34,6 +34,7 @@ class AuthService : AuthServiceInterface {
             val newUserFS = UserFS(
                 id = result.uid,
                 email = email.value,
+                userName = "UserName",
                 creationDate = Timestamp.now(),
                 monCount = 0,
                 monShinyCount = 0
@@ -50,6 +51,7 @@ class AuthService : AuthServiceInterface {
             val user = User(
                 id = result.uid,
                 email = emailObj,
+                userName = "UserName",
                 creationDay = Date(),
                 monCount = 0,
                 monShinyCount = 0
@@ -83,6 +85,7 @@ class AuthService : AuthServiceInterface {
             val user = User(
                 id = result.uid,
                 email = emailDomain,
+                userName = userFS.userName,
                 creationDay = userFS.creationDate.toDate(),
                 monCount = userFS.monCount,
                 monShinyCount = userFS.monShinyCount
