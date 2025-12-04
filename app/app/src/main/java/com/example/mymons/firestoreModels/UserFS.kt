@@ -7,5 +7,4 @@ data class UserFS(
     @DocumentId var id: String? = null,
     val email: String = "",
     val creationDate: Timestamp = Timestamp.now(),
-    val mons: List<String> = emptyList()
 )

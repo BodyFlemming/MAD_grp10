@@ -1,5 +1,7 @@
 package com.example.mymons
 
+import CatchLocationScreen
+import MonDetailScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,9 +11,11 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -44,6 +48,8 @@ class MainActivity : ComponentActivity() {
 
                 // Used to run the open/close animation of the drawer
                 val scope = rememberCoroutineScope()
+
+                var selectedMon by remember { mutableStateOf<Mon?>(null) }
 
                 // Authentication setup
                 val isLoggedIn = remember { mutableStateOf(false) }
@@ -106,7 +112,29 @@ class MainActivity : ComponentActivity() {
                                         mons.value = monService.getMons()
                                     }
 
-                                    Mons(mons.value)
+                                    Mons(mons.value){ mon ->
+                                        selectedMon = mon
+                                        navController.navigate("monDetail")
+                                    }
+                                }
+                            }
+
+                            composable(route = "monDetail") {
+                                selectedMon?.let { mon ->
+                                    MonDetailScreen(
+                                        mon = mon,
+                                        onBackClick = { navController.popBackStack() },
+                                        onCatchLocationClick = { navController.navigate("catchLocation") }
+                                    )
+                                }
+                            }
+
+                            composable(route = "catchLocation") {
+                                selectedMon?.let { mon ->
+                                    CatchLocationScreen(
+                                        mon = mon,
+                                        onBackClick = { navController.popBackStack() }
+                                    )
                                 }
                             }
 

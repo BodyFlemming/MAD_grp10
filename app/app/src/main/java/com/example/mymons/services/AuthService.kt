@@ -32,7 +32,6 @@ class AuthService : AuthServiceInterface {
                 id = result.uid,
                 email = email.value,
                 creationDate = Timestamp.now(),
-                mons = emptyList()
             )
 
             db.collection("users")

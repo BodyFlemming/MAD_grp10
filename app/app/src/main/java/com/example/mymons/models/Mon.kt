@@ -4,11 +4,14 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.Date
 
+import com.google.firebase.firestore.GeoPoint
+
 data class Mon(
     val id: Int,
     val name: String,
     val frontDefault: String,
-    val caughtDate: java.util.Date
+    val caughtDate: java.util.Date,
+    val catchLoc: GeoPoint,
 )
 
 @Serializable
@@ -29,6 +32,7 @@ fun PokemonApiResponse.toMon(): Mon {
         id = this.id,
         name = this.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }, // Capitalize name
         frontDefault = this.sprites.frontDefault ?: "https://placehold.co/150x150/EEEEEE/333333?text=?", // Provide fallback URL
-        caughtDate = Date()
+        caughtDate = Date(),
+        catchLoc = GeoPoint(0.0, 0.0) // placeholder
     )
 }

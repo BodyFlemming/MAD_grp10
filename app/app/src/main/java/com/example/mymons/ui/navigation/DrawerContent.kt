@@ -51,6 +51,7 @@ fun DrawerContent(
                     scope.launch { drawerState.close() }
                 }
             )
+
         } else {
             NavigationDrawerItem(
                 label = { Text("Sign In") },
