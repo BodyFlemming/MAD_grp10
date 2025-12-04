@@ -1,6 +1,7 @@
 package com.example.mymons.ui.mons
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -29,18 +30,20 @@ import com.example.mymons.ui.theme.Black
 import com.example.mymons.ui.theme.White
 
 @Composable
-fun Mons(mons: List<Mon>) {
-    Column() {
-        mons.forEach { MonItem(it) }
+fun Mons(mons: List<Mon>, onMonClick: (Mon) -> Unit) {
+    Column {
+        mons.forEach { mon ->
+            MonItem(mon = mon, onClick = { onMonClick(mon) })
+        }
     }
 }
-
 @Composable
-fun MonItem(mon: Mon) {
+fun MonItem(mon: Mon, onClick: (mon: Mon) -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .padding(vertical = 4.dp)
+            .clickable(onClick = { onClick(mon)}),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
