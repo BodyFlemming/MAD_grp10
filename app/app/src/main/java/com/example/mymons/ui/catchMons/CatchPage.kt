@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.mymons.models.Mon
+import com.example.mymons.services.MonService
 import com.example.mymons.services.PokeApiService
 import com.example.mymons.services.PokeApiServiceInterface
 import kotlin.random.Random
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
 
 // Injecting the service is best practice. Here, we'll instantiate it for simplicity.
 private val pokeApiService: PokeApiServiceInterface = PokeApiService()
-
+private val monService: MonService = MonService()
 @Composable
 fun CatchPage() {
     // State to hold the result of the catch operation
@@ -32,31 +33,32 @@ fun CatchPage() {
 
     // Function that handles the entire "Catch" logic
     val catchPokemon: () -> Unit = {
-        // 1. Reset state
         caughtMon = null
         errorMessage = null
         isLoading = true
 
         coroutineScope.launch {
             try {
-                // 2. Generate a random Pokémon ID
                 val randomId = Random.nextInt(
                     PokeApiService.MIN_POKEMON_ID,
                     PokeApiService.MAX_POKEMON_ID + 1
                 ) // +1 because nextInt is exclusive on the upper bound
 
-                // 3. Call the API service
+                // call api for pokemon
                 val resultMon = pokeApiService.getMonById(randomId)
 
-                // 4. Update the state with the result
+                // Save to db
+                val isSuccess = monService.addMon(resultMon)
+                if (!isSuccess) {
+                    throw Exception("Failed to save the caught Pokémon to the database.")
+                }
+
                 caughtMon = resultMon
 
             } catch (e: Exception) {
-                // 5. Handle any network or API errors
                 errorMessage = "Failed to catch a Pokémon! Error: ${e.message}"
                 println(errorMessage)
             } finally {
-                // 6. Stop loading regardless of success or failure
                 isLoading = false
             }
         }
