@@ -35,6 +35,15 @@ fun DrawerContent(
             )
 
             NavigationDrawerItem(
+                label = { Text("Catch Mon") },
+                selected = false,
+                onClick = {
+                    navController.navigate("catchMons")
+                    scope.launch { drawerState.close() }
+                }
+            )
+
+            NavigationDrawerItem(
                 label = { Text("User") },
                 selected = false,
                 onClick = {

@@ -23,6 +23,7 @@ import com.example.mymons.services.AuthService
 import com.example.mymons.services.MonService
 import com.example.mymons.ui.auth.SignIn
 import com.example.mymons.ui.auth.SignUp
+import com.example.mymons.ui.catchMons.CatchPage
 import com.example.mymons.ui.mons.Mons
 import com.example.mymons.ui.navigation.DrawerContent
 import com.example.mymons.ui.navigation.TopBar
@@ -106,6 +107,12 @@ class MainActivity : ComponentActivity() {
                                     }
 
                                     Mons(mons.value)
+                                }
+                            }
+
+                            composable(route = "catchMons") {
+                                if (isLoggedIn.value) {
+                                    CatchPage()
                                 }
                             }
 
