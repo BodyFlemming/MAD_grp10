@@ -10,14 +10,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mymons.data.dto.UserFS
 import com.example.mymons.models.auth.User
 import com.example.mymons.services.AuthService
 import com.example.mymons.services.UserService
 import com.example.mymons.ui.global.BulletList
 import com.example.mymons.ui.global.ImageCard
 import com.example.mymons.ui.theme.White
-import com.google.firebase.firestore.FirebaseFirestore
 
 @Composable
 fun UserDashboardPage(onSignOut: () -> Unit) {
@@ -25,7 +23,6 @@ fun UserDashboardPage(onSignOut: () -> Unit) {
     val dummyAmountOfShinies = 2
 
     val authService: AuthService = remember { AuthService() }
-    val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     val userService: UserService = remember { UserService() }
 
     val user = remember { mutableStateOf<User?>(null) }
