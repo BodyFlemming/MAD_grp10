@@ -1,5 +1,8 @@
 package com.example.mymons.ui.catchMons
 
+import android.Manifest
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -23,13 +26,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.mymons.models.Mon
+import com.example.mymons.services.LocationService
 import com.example.mymons.services.MonService
 import com.example.mymons.services.PokeApiService
 import com.example.mymons.services.PokeApiServiceInterface
+import com.google.firebase.firestore.GeoPoint
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
@@ -49,8 +55,11 @@ fun CatchPage() {
     // Coroutine scope for running suspending functions (like the API call)
     val coroutineScope = rememberCoroutineScope()
 
+    val context = LocalContext.current
+    val locationService = remember { LocationService(context) }
+
     // Function that handles the entire "Catch" logic
-    val catchPokemon: () -> Unit = {
+    val catchPokemon: (GeoPoint) -> Unit = { location ->
         caughtMon = null
         errorMessage = null
         isLoading = true
@@ -63,15 +72,17 @@ fun CatchPage() {
                 ) // +1 because nextInt is exclusive on the upper bound
 
                 // call api for pokemon
-                val resultMon = pokeApiService.getMonById(randomId)
+                val apiMon = pokeApiService.getMonById(randomId)
+
+                val finalMon = apiMon.copy(catchLoc = location)
 
                 // Save to db
-                val isSuccess = monService.addMon(resultMon)
+                val isSuccess = monService.addMon(finalMon)
                 if (!isSuccess) {
                     throw Exception("Failed to save the caught Pokémon to the database.")
                 }
 
-                caughtMon = resultMon
+                caughtMon = finalMon
 
             } catch (e: Exception) {
                 errorMessage = "Failed to catch a Pokémon! Error: ${e.message}"
@@ -79,6 +90,23 @@ fun CatchPage() {
             } finally {
                 isLoading = false
             }
+        }
+    }
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val granted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+
+        if (granted) {
+            coroutineScope.launch {
+                val loc = locationService.getCurrentLocation()
+                if (loc != null) catchPokemon(loc)
+                else errorMessage = "Could not fetch GPS signal"
+            }
+        } else {
+            errorMessage = "Permission needed to catch Pokemon!"
         }
     }
 
@@ -147,8 +175,20 @@ fun CatchPage() {
 
         // --- Catch Button ---
         Button(
-            onClick = catchPokemon,
-            enabled = !isLoading, // Disable button while loading
+            onClick = {
+                isLoading = true
+                if (locationService.hasPermission()) {
+                    coroutineScope.launch {
+                        val loc = locationService.getCurrentLocation()
+                        if (loc != null) catchPokemon(loc)
+                    }
+                } else {
+                    permissionLauncher.launch(
+                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
+                    )
+                }
+            },
+            enabled = !isLoading,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp)
