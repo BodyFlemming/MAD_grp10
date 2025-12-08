@@ -20,6 +20,15 @@ Each user has a personal profile where they can view account details and manage 
 
 <div style="page-break-before: always;"></div>
 
+## Test User
+
+Credentials for the test user:
+
+```
+mail: test@gmail.com
+password: Tester123!
+```
+
 ## User-stories
 
 - Auth:
