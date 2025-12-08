@@ -3,6 +3,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -68,7 +69,7 @@ fun CatchLocationScreen(
                 )
             )
         },
-        containerColor = Color(0xFF1A1A2E)
+        containerColor = Color(0x00000000)
     ) { padding ->
         Column(
             modifier = Modifier
@@ -124,8 +125,8 @@ fun CatchLocationScreen(
                     }
                 },
                 modifier = Modifier
-                    .weight(1f)
                     .fillMaxWidth()
+                    .height(200.dp)
             )
 
             // Coordinates at bottom
@@ -138,7 +139,7 @@ fun CatchLocationScreen(
                 fontSize = 14.sp,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(0.dp, 100.dp, 0.dp, 0.dp),
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center
             )
         }
