@@ -1,15 +1,18 @@
-# MyMons
+---
+title: My Mons
+date: December 2025
+---
 
-<title>MyMons</title>
-
-| App project 10 |
-| -------------- |
+| App project GRP 10 |
+| ------------------ |
 
 | Navn                    | Studienummer |
 | ----------------------- | ------------ |
 | Lasse Borring Petersen  | 202208165    |
 | Benjamin Harboe Strunge | 202209864    |
 | Esben Inglev            | 202210050    |
+
+\newpage
 
 ## App Vision
 
