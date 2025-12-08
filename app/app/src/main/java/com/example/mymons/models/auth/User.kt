@@ -8,6 +8,4 @@ data class User(
     val email: Email,
     val pokemonAvatar: String,
     val creationDay: Date,
-    val monCount: Int,
-    val monShinyCount: Int
 ) {}
