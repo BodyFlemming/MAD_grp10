@@ -79,6 +79,8 @@ Below is the component diagram of the system. The diagram is bit more verbose th
 
 ![Component Diagram](./img/ProjectReport/component_diagram.png){width=110%}
 
+As can be seen, most of the external dependencies have their own service, each located in their own `.kt` file in the app source. It should be noted, that the app provider or choice, OpenStreetMap, doesn't, as it is only used in a single place (the catch location detail page).
+
 ## Conclusion
 
 The app has fullfilled all of the user stories. A user can signup, login, catch a mon and view their mons.
