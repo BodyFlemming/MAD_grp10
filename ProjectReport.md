@@ -38,7 +38,7 @@ Each user has a personal profile where they can view account details and manage 
 
 <div style="page-break-before: always;"></div>
 
-## Diagrams
+## UI Diagrams
 
 ### Profile page and collection page
 
@@ -58,6 +58,11 @@ Each user has a personal profile where they can view account details and manage 
 <!-- <div style="page-break-before: always;"></div>
 <div style="page-break-before: always;"></div> -->
 
-### Component Diagrams
+## Component Diagrams
 
+## Conclusion
+
+The app has fullfilled all of the user stories. A user can signup, login, catch a mon and view their mons. The app UI in itself is pretty simple, but the software architecture of the app has been the challenge. With multiple external dependencies the team has obtained significant knowledge on how to connect a kotlin app to these sources. This has been done via configurable files such as the gradle files, .toml file and the manifest. This has been done for dependencies such as Firestore, Authentication and OpenStreetMap. For external REST based APIs the team has learned about Ktor  
+
+has obtained both significant insight in the projects configurable files (Gradle, toml, manifest) and how to requests calls   
 
