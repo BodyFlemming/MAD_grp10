@@ -62,7 +62,11 @@ Each user has a personal profile where they can view account details and manage 
 
 ## Conclusion
 
-The app has fullfilled all of the user stories. A user can signup, login, catch a mon and view their mons. The app UI in itself is pretty simple, but the software architecture of the app has been the challenge. With multiple external dependencies the team has obtained significant knowledge on how to connect a kotlin app to these sources. This has been done via configurable files such as the gradle files, .toml file and the manifest. This has been done for dependencies such as Firestore, Authentication and OpenStreetMap. For external REST based APIs the team has learned about Ktor  
+The app has fullfilled all of the user stories. A user can signup, login, catch a mon and view their mons. 
 
-has obtained both significant insight in the projects configurable files (Gradle, toml, manifest) and how to requests calls   
+The app UI in itself is pretty simple, but the software architecture of the app has been the real challenge. With multiple external dependencies the team has obtained significant knowledge on how to connect a kotlin app to these sources. This has been done via configurable files such as the gradle files, .toml file and the manifest. This has been done for dependencies such as Firestore, Authentication and OpenStreetMap. For external REST based APIs the team has used simple serialization. This has been done for the PokeApi
 
+The team has also gained insight in how to structure a Kotlin app. After multiple iterations of the structure the team decided to implement a classic service oriented logic flow, but without ViewModels, as this was deemed to be overkill for an app of this size.
+
+## Known bugs
+  - When using the dynamic capabilities of the map in the mon details view, the map does not always retain it's original dimensions and position
