@@ -85,6 +85,8 @@ Below is the use case diagrams for the app, with not all, but the most relevant 
 ![Mon Details](./img/ProjectReport/MonDetails.png){width=50%}
 ![Caught Location](./img/ProjectReport/CaughtLocation.png){width=50%}
 
+\newpage
+
 ## Component Diagrams
 
 Below is the component diagram of the system. The diagram is bit more verbose than most component diagrams, in order to show what pages uses which services.
