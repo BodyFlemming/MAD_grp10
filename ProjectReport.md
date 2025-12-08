@@ -23,10 +23,10 @@ Each user has a personal profile where they can view account details and manage 
 ## User-stories
 
 - Auth:
-  - As a user, I want to be able to navigate to a sign-up page, and create an account.
+  - As a user, I want to be able to navigate to a sign-up page, and create an account with a username and an icon.
   - As a user, I would like to be able to navigate to a login page, and enter my email and password to login.
 - Catch:
-  - As a user, I want to navigate to the "Catch pokémon" page and obtain a randomly generated pokémon
+  - As a user, I want to navigate to the "Catch mon" page and obtain a randomly generated mon
 - Collection:
   - As a user, I want to view all pokémon that I have caught in an overview.
   - As a user, I want to be able to click on a specific pokémon, to view details about it.
@@ -34,48 +34,30 @@ Each user has a personal profile where they can view account details and manage 
 - Profile:
   - As a user I want to navigate to the "My profile" page where I can view all the details about my account
 
+### Use Case Diagrams
+
 <div style="page-break-before: always;"></div>
 
-## Mockups
+## Diagrams
 
 ### Profile page and collection page
 
-<img src="img/ui_mocks-Dashboard.drawio.png" alt="Dashboard" width="200"/>
-<img src="img/ui_mocks-Pokemons.drawio.png" alt="Pokemons" width="200"/>
-
-### Pokemon details and catch location
-
-<img src="img/ui_mocks-Details.drawio.png" alt="Details" width="200"/>
-<img src="img/ui_mocks-Map.drawio.png" alt="Map" width="200"/>
-
-<div style="page-break-before: always;"></div>
+<img src="img/projectreport/UserDashboard.png" alt="Dashboard" width="200"/>
+<img src="img/projectreport/MyMons.png" alt="Pokemons" width="200"/>
 
 ### Pokemon catch page
 
-<img src="img/ui_mocks-Catch.drawio.png" alt="Catch" width="200"/>
-<img src="img/ui_mocks-Catch%20done.drawio.png" alt="Catch done" width="200"/>
+<img src="img/projectreport/CathMon.png" alt="Catch" width="200"/>
+<img src="img/projectreport/CathcedMon.png" alt="Catch done" width="200"/>
 
-<div style="page-break-before: always;"></div>
+### Pokemon details and catch location
 
-## List of Technologies
+<img src="img/projectreport/MonDetails.png" alt="Details" width="200"/>
+<img src="img/projectreport/CaughtLocation.png" alt="Map" width="200"/>
 
-For the database, we will be using Google's firestore database. This database is easy to work with, since its all in the cloud, and there is native support for using it with android apps.
-It supports multiple ways of querying for data, like shallow queries to only receive data at the document level, as well as sorting, filtering and limits to your queries. You can also use realtime listeners to continuously update the data that your clients have fetched.
+<!-- <div style="page-break-before: always;"></div>
+<div style="page-break-before: always;"></div> -->
 
-This database choice works well with the firebase 'ecosystem', from which we will also be using firebase auth for our sign-in flow.
-It features multiple different ways of signing in, with both normal email and password login supported, as well as other identity providers, such as Google- and Facebook-login.
+### Component Diagrams
 
-For the pokémon data, we will fetch it from [PokéAPI](pokeapi.co), which is a free restful api that contains all the data about every pokémon.
 
-Each pokémon will have a catch location, this requires a gps service, and to view the location a map service. We will use the Google Maps Platform Api. Google Maps Platform is a collection of all the publicly available information of the global infrastructure. It's a powerful tool with many capabilities.
-
-## Main Risks
-
-Any app that uses authentication and authorization, always comes with security risks. This can for example be due to faulty implementation or weak password protection.
-
-We are heavily dependent on an external API for our data. So if the api structure changes, goes down, or we are hit with rate limits, our app could be severely impacted. But looking at the documentation for the API found [here](https://pokeapi.co/docs/v2), this seems very unlikely to happen.
-
-The app saves the coordinates of where each pokemón was caught. This introduces some privacy risks, as user's approximate locations are collected and stored.
-
-And as we are working with pokémon, history tells us that there is a chance that Nintendo might sue us if it was ever published, so that is also worth remembering.
-[Source](https://en.wikipedia.org/wiki/Intellectual_property_protection_by_Nintendo)
