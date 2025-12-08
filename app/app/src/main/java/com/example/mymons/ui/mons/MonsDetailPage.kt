@@ -19,6 +19,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -59,7 +60,7 @@ fun MonDetailScreen(
                 )
             )
         },
-        containerColor = Color(0xFF1A1A2E)
+        containerColor = Color(0x00000000)
     ) { padding ->
         Column(
             modifier = Modifier
@@ -114,13 +115,8 @@ fun MonDetailScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             // Catch Location Button
-            Button(
+            PrimaryButton(
                 onClick = onCatchLocationClick,
-                modifier = Modifier.fillMaxWidth(),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF2C2C54)
-                ),
-                shape = RoundedCornerShape(8.dp)
             ) {
                 Text(
                     text = "Catch location",
