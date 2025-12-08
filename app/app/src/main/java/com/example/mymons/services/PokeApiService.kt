@@ -49,6 +49,6 @@ class PokeApiService : PokeApiServiceInterface {
         const val POKEAPI_URL = "https://pokeapi.co/api/v2/"
         const val MAX_POKEMON_ID = 1025 // Pokemon count in api, max value
         const val MIN_POKEMON_ID = 1
-        const val SHINY_ODDS = 20
+        const val SHINY_ODDS = 100
     }
 }

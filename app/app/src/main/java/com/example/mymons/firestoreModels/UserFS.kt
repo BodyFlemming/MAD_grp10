@@ -9,6 +9,4 @@ data class UserFS(
     val email: String = "",
     val pokemonAvatar: String = "",
     val creationDate: Timestamp = Timestamp.now(),
-    val monCount: Int = 0,
-    val monShinyCount: Int = 0
 )

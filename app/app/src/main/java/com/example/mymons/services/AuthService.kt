@@ -37,8 +37,6 @@ class AuthService : AuthServiceInterface {
                 name = name,
                 pokemonAvatar = avatar,
                 creationDate = Timestamp.now(),
-                monCount = 0,
-                monShinyCount = 0
             )
 
             db.collection("users")
@@ -53,8 +51,6 @@ class AuthService : AuthServiceInterface {
                 id = result.uid,
                 email = emailObj,
                 creationDay = Date(),
-                monCount = 0,
-                monShinyCount = 0,
                 pokemonAvatar = avatar,
                 name = name
             )
@@ -88,8 +84,6 @@ class AuthService : AuthServiceInterface {
                 id = result.uid,
                 email = emailDomain,
                 creationDay = userFS.creationDate.toDate(),
-                monCount = userFS.monCount,
-                monShinyCount = userFS.monShinyCount,
                 pokemonAvatar = userFS.pokemonAvatar,
                 name = userFS.name
             )

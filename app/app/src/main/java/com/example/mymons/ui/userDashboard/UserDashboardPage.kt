@@ -10,25 +10,30 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.mymons.models.Mon
 import com.example.mymons.models.auth.User
 import com.example.mymons.services.AuthService
+import com.example.mymons.services.AuthServiceInterface
+import com.example.mymons.services.MonService
+import com.example.mymons.services.MonServiceInterface
 import com.example.mymons.services.UserService
+import com.example.mymons.services.UserServiceInterface
 import com.example.mymons.ui.global.BulletList
 import com.example.mymons.ui.global.ImageCard
 import com.example.mymons.ui.theme.White
 
 @Composable
 fun UserDashboardPage(onSignOut: () -> Unit) {
-    val dummyAmountOfMons = 22
-    val dummyAmountOfShinies = 2
-
-    val authService: AuthService = remember { AuthService() }
-    val userService: UserService = remember { UserService() }
+    val authService: AuthServiceInterface = remember { AuthService() }
+    val userService: UserServiceInterface = remember { UserService() }
+    val monService: MonServiceInterface = remember { MonService() }
 
     val user = remember { mutableStateOf<User?>(null) }
+    val mons = remember { mutableStateOf<List<Mon>>(emptyList())}
 
     LaunchedEffect(Unit) {
         user.value = userService.getUser()
+        mons.value = monService.getMons()
     }
 
     user.value?.let { currentUser ->
@@ -42,8 +47,8 @@ fun UserDashboardPage(onSignOut: () -> Unit) {
             BulletList(
                 listOf(
                     "Email:\t${currentUser.email.value}",
-                    "Number of Mons:\t${dummyAmountOfMons}",
-                    "Number of shinies:\t${dummyAmountOfShinies}"
+                    "Number of Mons:\t${mons.value.size}",
+                    "Number of Shinies:\t${mons.value.filter{ it.isShiny }.size}",
                 )
             )
 
