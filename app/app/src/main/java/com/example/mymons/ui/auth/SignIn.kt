@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -16,9 +15,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.mymons.models.auth.Email
 import com.example.mymons.models.auth.Password
+import com.example.mymons.ui.components.LabelAndField
 
 @Composable
 fun SignIn(
@@ -29,24 +30,20 @@ fun SignIn(
     var password by remember { mutableStateOf("") }
 
     Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        LabelAndField(
+            label = "Email:",
+            value = email,
+            onValueChange = { email = it },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+        )
 
-        Row {
-            Text("Email:")
-            TextField(
-                value = email,
-                onValueChange = { email = it },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
-            )
-        }
-
-        Row {
-            Text("Password:")
-            TextField(
-                value = password,
-                onValueChange = { password = it },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-            )
-        }
+        LabelAndField(
+            label = "Password:",
+            value = password,
+            onValueChange = { password = it },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            visualTransformation = PasswordVisualTransformation()
+        )
 
         PrimaryButton(onClick = {
             if (!Email.validate(email) || !Password.validate(password)) {
