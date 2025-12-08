@@ -16,7 +16,7 @@ data class MonFS(
     val attack: Int = 0,
     val defense: Int = 0,
     val specialAttack: Int = 0,
-    val specialDefend: Int = 0,
+    val specialDefense: Int = 0,
     val speed: Int = 0,
     val type1: String = "Normal",
     val type2: String? = null
@@ -36,7 +36,7 @@ fun Mon.toMonFS(): MonFS {
         attack = this.attack,
         defense = this.defense,
         specialAttack = this.specialAttack,
-        specialDefend = this.specialDefend,
+        specialDefense = this.specialDefense,
         speed = this.speed,
         type1 = this.type1,
         type2 = this.type2

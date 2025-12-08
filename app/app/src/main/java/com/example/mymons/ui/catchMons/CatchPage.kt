@@ -52,13 +52,11 @@ fun CatchPage() {
     // State to handle errors
     var errorMessage by remember { mutableStateOf<String?>(null) }
 
-    // Coroutine scope for running suspending functions (like the API call)
     val coroutineScope = rememberCoroutineScope()
 
     val context = LocalContext.current
     val locationService = remember { LocationService(context) }
 
-    // Function that handles the entire "Catch" logic
     val catchPokemon: (GeoPoint) -> Unit = { location ->
         caughtMon = null
         errorMessage = null
@@ -69,14 +67,12 @@ fun CatchPage() {
                 val randomId = Random.nextInt(
                     PokeApiService.MIN_POKEMON_ID,
                     PokeApiService.MAX_POKEMON_ID + 1
-                ) // +1 because nextInt is exclusive on the upper bound
+                )
 
-                // call api for pokemon
                 val apiMon = pokeApiService.getMonById(randomId)
 
                 val finalMon = apiMon.copy(catchLoc = location)
 
-                // Save to db
                 val isSuccess = monService.addMon(finalMon)
                 if (!isSuccess) {
                     throw Exception("Failed to save the caught Pokémon to the database.")
@@ -123,7 +119,6 @@ fun CatchPage() {
             modifier = Modifier.padding(bottom = 32.dp)
         )
 
-        // --- Display Area ---
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -144,9 +139,7 @@ fun CatchPage() {
                         modifier = Modifier.padding(16.dp)
                     )
                 } else if (caughtMon != null) {
-                    // Display the caught Pokémon details
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        // Use Coil for image loading from the URL
                         AsyncImage(
                             model = caughtMon!!.sprite,
                             contentDescription = "${caughtMon!!.name} sprite",
@@ -173,7 +166,6 @@ fun CatchPage() {
             }
         }
 
-        // --- Catch Button ---
         Button(
             onClick = {
                 isLoading = true

@@ -12,14 +12,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -103,14 +100,13 @@ fun MonDetailScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Stats (using dummy data for now since Mon doesn't have stats)
             StatsSection(
-                type = if (mon.type2 != null) "${mon.type1} / ${mon.type2}" else mon.type1,
+                type = if (mon.type2 != null) "${mon.type1.replaceFirstChar { c -> c.titlecase() }} / ${mon.type2.replaceFirstChar { c -> c.titlecase() }}" else mon.type1.replaceFirstChar { c -> c.titlecase() },
                 hp = mon.hp,
                 attack = mon.attack,
                 defense = mon.defense,
                 specialAttack = mon.specialAttack,
-                specialDefense = mon.specialDefend,
+                specialDefense = mon.specialDefense,
                 speed = mon.speed,
             )
 

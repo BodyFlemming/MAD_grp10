@@ -52,24 +52,16 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation)
-    // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:34.6.0"))
-    // TODO: Add the dependencies for Firebase products you want to use
-    // When using the BoM, don't specify versions in Firebase dependencies
-    // By using the Firebase Android BoM, your app will always use compatible Firebase library versions.
     implementation("com.google.firebase:firebase-analytics")
-    // Add the dependencies for any other desired Firebase products
     implementation("com.google.firebase:firebase-firestore")
     implementation(libs.google.firebase.auth)
-
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.android)
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.ktor.client.logging)
-
     implementation(libs.coil.compose)
-
     implementation("com.google.android.gms:play-services-location:21.2.0")
 
     testImplementation(libs.junit)

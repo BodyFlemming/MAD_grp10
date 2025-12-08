@@ -24,8 +24,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.mymons.models.Mon
-import com.example.mymons.models.auth.Email
-import com.example.mymons.models.auth.User
 import com.example.mymons.services.AuthService
 import com.example.mymons.services.MonService
 import com.example.mymons.ui.auth.SignIn
@@ -37,7 +35,6 @@ import com.example.mymons.ui.navigation.TopBar
 import com.example.mymons.ui.theme.MyMonsTheme
 import com.example.mymons.ui.userDashboard.UserDashboardPage
 import kotlinx.coroutines.launch
-import java.util.Date
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,10 +83,10 @@ class MainActivity : ComponentActivity() {
                             TopBar(
                                 title = currentPage,
                                 onMenuClicked = {
-                                scope.launch {
-                                    if (drawerState.isClosed) drawerState.open() else drawerState.close()
-                                }
-                            })
+                                    scope.launch {
+                                        if (drawerState.isClosed) drawerState.open() else drawerState.close()
+                                    }
+                                })
                         }) { innerPadding ->
                         NavHost(
                             navController = navController,
@@ -164,13 +161,12 @@ class MainActivity : ComponentActivity() {
                             composable(route = "users") {
                                 if (isLoggedIn.value) {
                                     UserDashboardPage(
-                                         onSignOut = {
+                                        onSignOut = {
                                             isLoggedIn.value = false
                                             navController.navigate("signIn") {
                                                 popUpTo("users") { inclusive = true }
                                             }
                                         })
-//                                    Mons(mons.value)
                                 }
                             }
                         }

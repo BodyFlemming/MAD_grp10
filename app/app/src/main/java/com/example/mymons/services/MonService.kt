@@ -49,7 +49,7 @@ class MonService : MonServiceInterface {
                 attack = it.attack,
                 defense = it.defense,
                 specialAttack = it.specialAttack,
-                specialDefend = it.specialDefend,
+                specialDefense = it.specialDefense,
                 speed = it.speed,
                 type1 = it.type1,
                 type2 = it.type2
@@ -58,13 +58,11 @@ class MonService : MonServiceInterface {
     }
 
     suspend fun addMon(mon: Mon): Boolean {
-        val uid = auth.currentUser?.uid ?: return false // Cannot save if not logged in
+        val uid = auth.currentUser?.uid ?: return false
 
-        // Convert the application Mon model to the Firestore MonFS model
         val monFS = mon.toMonFS()
 
         return try {
-            // Use add() to automatically generate a document ID
             getUserMonsCollection(uid)
                 .add(monFS)
                 .await()

@@ -16,7 +16,7 @@ data class Mon(
     val attack: Int,
     val defense: Int,
     val specialAttack: Int,
-    val specialDefend: Int,
+    val specialDefense: Int,
     val speed: Int,
     val type1: String,
     val type2: String?
@@ -82,7 +82,7 @@ fun PokemonApiResponse.toMon(isShiny: Boolean): Mon {
         attack = this.stats[1].baseStat,
         defense = this.stats[2].baseStat,
         specialAttack = this.stats[3].baseStat,
-        specialDefend = this.stats[4].baseStat,
+        specialDefense = this.stats[4].baseStat,
         speed = this.stats[5].baseStat,
         type1 = getTypeName(0) ?: "Normal",
         type2 = getTypeName(1)

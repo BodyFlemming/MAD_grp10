@@ -1,6 +1,5 @@
 package com.example.mymons.services
 
-import android.util.Log
 import com.example.mymons.models.Mon
 import com.example.mymons.models.PokemonApiResponse
 import com.example.mymons.models.toMon
@@ -17,9 +16,7 @@ interface PokeApiServiceInterface {
 }
 
 class PokeApiService : PokeApiServiceInterface {
-    // Ktor HTTP Client setup
     private val client = HttpClient {
-        // Configure JSON serialization using kotlinx.serialization
         install(ContentNegotiation) {
             json(Json {
                 ignoreUnknownKeys = true // Ignore fields we dont use
@@ -30,16 +27,11 @@ class PokeApiService : PokeApiServiceInterface {
     }
 
     override suspend fun getMonById(id: Int): Mon {
-        // Construct the full URL for the API call
         val url = "${POKEAPI_URL}pokemon/$id"
-        println("Fetching Pokémon from: $url") // Helpful for debugging
 
         try {
             val response: PokemonApiResponse = client.get(url).body()
 
-            Log.d("PokemonDebug", "Response received: $response")
-
-            // Map the API response to the data class
             val isShiny = (0..100).random() < SHINY_ODDS
             return response.toMon(isShiny)
         } catch (e: Exception) {
@@ -50,7 +42,7 @@ class PokeApiService : PokeApiServiceInterface {
 
     companion object {
         const val POKEAPI_URL = "https://pokeapi.co/api/v2/"
-        const val MAX_POKEMON_ID = 1025 // Pokemon count in api, max value
+        const val MAX_POKEMON_ID = 1025
         const val MIN_POKEMON_ID = 1
         const val SHINY_ODDS = 20
     }
