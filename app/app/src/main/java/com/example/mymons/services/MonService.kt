@@ -44,7 +44,15 @@ class MonService : MonServiceInterface {
                 sprite = it.frontDefault,
                 caughtDate = it.caughtDate.toDate(),
                 catchLoc = it.catchLoc,
-                isShiny = it.shiny
+                isShiny = it.shiny,
+                hp = it.hp,
+                attack = it.attack,
+                defense = it.defense,
+                specialAttack = it.specialAttack,
+                specialDefend = it.specialDefend,
+                speed = it.speed,
+                type1 = it.type1,
+                type2 = it.type2
             )
         }
     }

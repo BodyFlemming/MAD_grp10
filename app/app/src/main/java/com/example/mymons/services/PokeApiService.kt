@@ -1,5 +1,6 @@
 package com.example.mymons.services
 
+import android.util.Log
 import com.example.mymons.models.Mon
 import com.example.mymons.models.PokemonApiResponse
 import com.example.mymons.models.toMon
@@ -35,6 +36,8 @@ class PokeApiService : PokeApiServiceInterface {
 
         try {
             val response: PokemonApiResponse = client.get(url).body()
+
+            Log.d("PokemonDebug", "Response received: $response")
 
             // Map the API response to the data class
             val isShiny = (0..100).random() < SHINY_ODDS
