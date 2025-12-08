@@ -1,5 +1,6 @@
 package com.example.mymons.ui.auth
 
+import PrimaryButton
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -107,19 +108,21 @@ fun SignUp(signUp: (name: String, email: Email, password: Password, avatar: Stri
 
 
 
-        Button(onClick = {
-            if (!Email.validate(email) || !Password.validate(password)) {
-                Log.v("SIMPLIFIED", "Error in $email or $password")
-            } else {
-                // Create the objects and call the callback
-                signUp(
-                    name,
-                    Email(email),
-                    Password(password),
-                    selectedPokemon[selectedPokemonName]!!
-                )
-            }
-        }) {
+        PrimaryButton(
+            onClick = {
+                if (!Email.validate(email) || !Password.validate(password)) {
+                    Log.v("SIMPLIFIED", "Error in $email or $password")
+                } else {
+                    // Create the objects and call the callback
+                    signUp(
+                        name,
+                        Email(email),
+                        Password(password),
+                        selectedPokemon[selectedPokemonName]!!
+                    )
+                }
+            },
+        ) {
             Text("Sign Up")
         }
     }

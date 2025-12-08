@@ -1,5 +1,6 @@
 package com.example.mymons.ui.userDashboard
 
+import PrimaryButton
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
@@ -52,14 +53,15 @@ fun UserDashboardPage(onSignOut: () -> Unit) {
                 )
             )
 
-            Button(
+            PrimaryButton(
                 onClick = {
                     authService.signOut()
                     onSignOut()
                 },
-                enabled = true,
-                content = { Text("Sign out") }
-            )
+                enabled = true
+            ) {
+                Text("Sign Out")
+            }
         }
     }
 }

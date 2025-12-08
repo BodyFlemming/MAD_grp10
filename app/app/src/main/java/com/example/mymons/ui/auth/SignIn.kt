@@ -1,5 +1,7 @@
 package com.example.mymons.ui.auth
 
+import PrimaryButton
+import SecondaryButton
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -46,7 +48,7 @@ fun SignIn(
             )
         }
 
-        Button(onClick = {
+        PrimaryButton(onClick = {
             if (!Email.validate(email) || !Password.validate(password)) {
                 Log.v("SIMPLIFIED", "Invalid format: $email or $password")
             } else {
@@ -56,7 +58,7 @@ fun SignIn(
             Text("Sign In")
         }
 
-        Button(onClick = {
+        SecondaryButton(onClick = {
             onNavigateToSingUp()
         }) {
             Text("Sign Up")
