@@ -29,7 +29,7 @@ import com.example.mymons.services.MonService
 import com.example.mymons.ui.auth.SignIn
 import com.example.mymons.ui.auth.SignUp
 import com.example.mymons.ui.catchMons.CatchPage
-import com.example.mymons.ui.mons.Mons
+import com.example.mymons.ui.mons.MonsPage
 import com.example.mymons.ui.navigation.DrawerContent
 import com.example.mymons.ui.navigation.TopBar
 import com.example.mymons.ui.theme.MyMonsTheme
@@ -126,7 +126,7 @@ class MainActivity : ComponentActivity() {
                                         mons.value = monService.getMons()
                                     }
 
-                                    Mons(mons.value) { mon ->
+                                    MonsPage(mons.value) { mon ->
                                         selectedMon = mon
                                         navController.navigate("monDetail")
                                     }

@@ -32,7 +32,7 @@ import com.example.mymons.ui.theme.Black
 import com.example.mymons.ui.theme.White
 
 @Composable
-fun Mons(mons: List<Mon>, onMonClick: (Mon) -> Unit) {
+fun MonsPage(mons: List<Mon>, onMonClick: (Mon) -> Unit) {
     val scrollState = rememberScrollState()
 
     Column (modifier = Modifier.padding(horizontal = 16.dp).verticalScroll(scrollState)) {
