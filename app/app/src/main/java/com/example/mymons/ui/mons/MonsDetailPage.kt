@@ -104,11 +104,13 @@ fun MonDetailScreen(
 
             // Stats (using dummy data for now since Mon doesn't have stats)
             StatsSection(
-                type = "Normal",
-                hp = 46,
-                attack = 49,
-                defense = 49,
-                speed = 45
+                type = if (mon.type2 != null) "${mon.type1} / ${mon.type2}" else mon.type1,
+                hp = mon.hp,
+                attack = mon.attack,
+                defense = mon.defense,
+                specialAttack = mon.specialAttack,
+                specialDefense = mon.specialDefend,
+                speed = mon.speed,
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -139,7 +141,15 @@ fun MonDetailScreen(
 }
 
 @Composable
-fun StatsSection(type: String, hp: Int, attack: Int, defense: Int, speed: Int) {
+fun StatsSection(
+    type: String,
+    hp: Int,
+    attack: Int,
+    defense: Int,
+    specialAttack: Int,
+    specialDefense: Int,
+    speed: Int
+) {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -147,6 +157,8 @@ fun StatsSection(type: String, hp: Int, attack: Int, defense: Int, speed: Int) {
         StatRow("HP", hp.toString())
         StatRow("Attack", attack.toString())
         StatRow("Defense", defense.toString())
+        StatRow("Special attack", specialAttack.toString())
+        StatRow("Special defense", specialDefense.toString())
         StatRow("Speed", speed.toString())
     }
 }

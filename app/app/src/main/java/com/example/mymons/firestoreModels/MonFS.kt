@@ -11,7 +11,15 @@ data class MonFS(
     val frontDefault: String = "",
     val caughtDate: Timestamp = Timestamp.now(),
     val catchLoc: GeoPoint = GeoPoint(0.0, 0.0),
-    val isShiny: Boolean = false
+    val isShiny: Boolean = false,
+    val hp: Int = 0,
+    val attack: Int = 0,
+    val defense: Int = 0,
+    val specialAttack: Int = 0,
+    val specialDefend: Int = 0,
+    val speed: Int = 0,
+    val type1: String = "Normal",
+    val type2: String? = null
 )
 
 fun Mon.toMonFS(): MonFS {
@@ -23,6 +31,14 @@ fun Mon.toMonFS(): MonFS {
         // Convert application Date to Firestore Timestamp
         caughtDate = Timestamp(this.caughtDate),
         catchLoc = this.catchLoc,
-        isShiny = this.isShiny
+        isShiny = this.isShiny,
+        hp = this.hp,
+        attack = this.attack,
+        defense = this.defense,
+        specialAttack = this.specialAttack,
+        specialDefend = this.specialDefend,
+        speed = this.speed,
+        type1 = this.type1,
+        type2 = this.type2
     )
 }
